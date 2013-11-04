@@ -129,7 +129,7 @@ final class Drawer implements DrawerInterface
     /**
      * {@inheritdoc}
      */
-    public function dashedLine(PointInterface $start, PointInterface $end, Color $fillColor, Color $strokeColor, $fillWidth, $strokeWidth, $thickness = 1)
+    public function dashedLine(PointInterface $start, PointInterface $end, ColorInterface $fillColor, ColorInterface $strokeColor, $fillWidth, $strokeWidth, $thickness = 1)
     {
         imagesetthickness($this->resource, max(1, (int) $thickness));
 
