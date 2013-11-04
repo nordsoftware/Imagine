@@ -25,6 +25,9 @@
     "require-dev": {
         "sami/sami": "dev-master"
     },
+    "replace": {
+        "imagine/imagine": "*"
+    },
     "suggest": {
         "ext-gd": "to use the GD implementation",
         "ext-imagick": "to use the Imagick implementation",
