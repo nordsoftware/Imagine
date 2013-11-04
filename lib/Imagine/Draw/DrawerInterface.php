@@ -85,6 +85,21 @@ interface DrawerInterface
     public function line(PointInterface $start, PointInterface $end, ColorInterface $outline, $thickness = 1);
 
     /**
+     * Draws a dashed line from start(x, y) to end(x, y) coordinates
+     *
+     * @param Imagine\Image\PointInterface $start
+     * @param Imagine\Image\PointInterface $end
+     * @param Imagine\Image\Color          $fillColor
+     * @param Imagine\Image\Color          $strokeColor
+     * @param int                          $fillWidth
+     * @param int                          $strokeWidth
+     * @param int                          $thickness
+     *
+     * @return DrawerInterface
+     */
+    public function dashedLine(PointInterface $start, PointInterface $end, Color $fillColor, Color $strokeColor, $fillWidth, $strokeWidth, $thickness = 1);
+
+    /**
      * Same as arc, but connects end points and the center
      *
      * @param PointInterface $center

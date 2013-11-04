@@ -129,6 +129,34 @@ final class Drawer implements DrawerInterface
     /**
      * {@inheritdoc}
      */
+    public function dashedLine(PointInterface $start, PointInterface $end, Color $fillColor, Color $strokeColor, $fillWidth, $strokeWidth, $thickness = 1)
+    {
+        imagesetthickness($this->resource, max(1, (int) $thickness));
+
+        $strokePixel = $this->getColor($strokeColor);
+        $fillPixel = $this->getColor($fillColor);
+        $style = array();
+        for ($i = 0; $i < $strokeWidth; $i++) {
+            $style[] = $strokePixel;
+        }
+        for ($i = 0; $i < $fillWidth; $i++) {
+            $style[] = $fillPixel;
+        }
+        imagesetstyle($this->resource, $style);
+
+        if (false === imageline(
+                $this->resource, $start->getX(), $start->getY(),
+                $end->getX(), $end->getY(), IMG_COLOR_STYLED
+            )) {
+            throw new RuntimeException('Draw line operation failed');
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function pieSlice(PointInterface $center, BoxInterface $size, $start, $end, ColorInterface $color, $fill = false, $thickness = 1)
     {
         imagesetthickness($this->resource, max(1, (int) $thickness));

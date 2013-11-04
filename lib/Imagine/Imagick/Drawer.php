@@ -218,6 +218,48 @@ final class Drawer implements DrawerInterface
     /**
      * {@inheritdoc}
      */
+    public function dashedLine(PointInterface $start, PointInterface $end, Color $fillColor, Color $strokeColor, $fillWidth, $strokeWidth, $thickness = 1)
+    {
+        try {
+            /** @var \ImagickPixel $fillPixel */
+            $fillPixel = $this->getColor($fillColor);
+            /** @var \ImagickPixel $strokePixel */
+            $strokePixel = $this->getColor($strokeColor);
+            $line  = new \ImagickDraw();
+
+            $line->setStrokeColor($strokePixel);
+            $line->setStrokeWidth(max(1, (int) $thickness));
+            $line->setStrokeDashArray(array($strokeWidth, $fillWidth));
+            $line->setFillColor($fillPixel);
+
+            $line->line(
+                $start->getX(),
+                $start->getY(),
+                $end->getX(),
+                $end->getY()
+            );
+
+            $this->imagick->drawImage($line);
+
+            $fillPixel->clear();
+            $fillPixel->destroy();
+            $strokePixel->clear();
+            $strokePixel->destroy();
+
+            $line->clear();
+            $line->destroy();
+        } catch (\ImagickException $e) {
+            throw new RuntimeException(
+                'Draw line operation failed', $e->getCode(), $e
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function pieSlice(PointInterface $center, BoxInterface $size, $start, $end, ColorInterface $color, $fill = false, $thickness = 1)
     {
         $width  = $size->getWidth();
