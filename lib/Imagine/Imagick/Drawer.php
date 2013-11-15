@@ -229,6 +229,8 @@ final class Drawer implements DrawerInterface
 
             $line->setStrokeColor($strokePixel);
             $line->setStrokeWidth(max(1, (int) $thickness));
+            $strokeWidth = max(1, (int) $strokeWidth);
+            $fillWidth = max(1, (int) $fillWidth);
             $line->setStrokeDashArray(array($strokeWidth, $fillWidth));
             $line->setFillColor($fillPixel);
 

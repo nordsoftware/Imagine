@@ -135,6 +135,8 @@ final class Drawer implements DrawerInterface
 
         $strokePixel = $this->getColor($strokeColor);
         $fillPixel = $this->getColor($fillColor);
+        $strokeWidth = max(1, (int) $strokeWidth);
+        $fillWidth = max(1, (int) $fillWidth);
         $style = array();
         for ($i = 0; $i < $strokeWidth; $i++) {
             $style[] = $strokePixel;
