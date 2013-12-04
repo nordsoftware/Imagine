@@ -162,6 +162,18 @@ interface ManipulatorInterface
     public function thumbnail(BoxInterface $size, $mode = self::THUMBNAIL_INSET, $filter = ImageInterface::FILTER_UNDEFINED);
 
     /**
+     * Upscales the current image and returns self
+     *
+     * @param BoxInterface $size
+     * @param string       $filter The filter to use for resizing, one of ImageInterface::FILTER_*
+     *
+     * @throws RuntimeException
+     *
+     * @return ManipulatorInterface
+     */
+    public function upscale(BoxInterface $size, $filter = ImageInterface::FILTER_UNDEFINED);
+
+    /**
      * Applies a given mask to current image's alpha channel
      *
      * @param ImageInterface $mask
