@@ -80,14 +80,17 @@ abstract class AbstractImage implements ImageInterface
     public function upscale(BoxInterface $size, $filter = ImageInterface::FILTER_UNDEFINED)
     {
         $imageSize = $this->getSize();
+        $resize = false;
 
-        // todo: we could probably do with one call to the resize method.
         if ($imageSize->getWidth() < $size->getWidth()) {
-            $imageSize = $this->getSize()->widen($size->getWidth());
-            $this->resize($imageSize, $filter);
+            $imageSize = $imageSize->widen($size->getWidth());
+            $resize = true;
         }
         if ($imageSize->getHeight() < $size->getHeight()) {
-            $imageSize = $this->getSize()->heighten($size->getHeight());
+            $imageSize = $imageSize->heighten($size->getHeight());
+            $resize = true;
+        }
+        if ($resize) {
             $this->resize($imageSize, $filter);
         }
 
