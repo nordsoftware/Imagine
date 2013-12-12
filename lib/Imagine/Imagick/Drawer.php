@@ -413,6 +413,11 @@ final class Drawer implements DrawerInterface
             $xdiff = 0 - min($x1, $x2);
             $ydiff = 0 - min($y1, $y2);
 
+            // @link https://github.com/avalanche123/Imagine/issues/32
+            // 24% seems like a good value to reduce the y position by.
+            // the fix that was suggested in the issue does not work.
+            $y2 = round($y2 * 0.76);
+
             $this->imagick->annotateImage(
                 $text, $position->getX() + $x1 + $xdiff,
                 $position->getY() + $y2 + $ydiff, $angle, $string
